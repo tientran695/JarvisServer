@@ -20,7 +20,7 @@ appServer.get('/', function (req, res) {
 //---------
 appServer.post('/', function (req, res) {
   console.log("Nhan ban tin POST");
-  console.log(req);
+  console.log(res);
 })
 
 server.listen(process.env.PORT || PORT);
