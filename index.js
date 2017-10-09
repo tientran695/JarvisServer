@@ -4,10 +4,10 @@
  * Apache 2.0 Licensed
  */
 const PORT = 3484;
-//var http = require('http');
+var http = require('http');
 var express = require('express');
 var appServer = express();
-//var server = http.Server(appServer);
+var server = http.Server(appServer);
 var apiai = require("apiai")
 var appJarvis = apiai("33371b1bd65149429018582c7b7f8b6b");
 
@@ -19,7 +19,7 @@ appServer.post('/', function (req, res) {
   console.log("Nhan ban tin POST");
 })
 
-appServer.listen(process.env.PORT || PORT);
+server.listen(process.env.PORT || PORT);
 
 
 // var server = http.createServer(function(request, response) {
