@@ -13,9 +13,9 @@ appServer.use(bodyParser.urlencoded({
 appServer.use(bodyParser.json());
 
 appServer.post('/echo', function(req, res) {
-    var speech = req.body.result.parameters.device;
+    //var speech = req.body.result.parameters.device;
     return res.json({
-        speech: speech,
+        speech: req,
         displayText: speech,
     });
 });
