@@ -17,6 +17,24 @@ appServer.get('/', function (req, res) {
 
 appServer.post('/', function (req, res) {
   console.log("Nhan ban tin POST");
+  var voiceRequest = appJarvis.voiceRequest();
+  voiceRequest.on('response', function(_response) {
+    response.end(JSON.stringify(_response));
+              // var json = JSON.stringify({'resolvedQuery': _response['result']['resolvedQuery']})
+              // response.end(json);
+            });
+  voiceRequest.on('error', function(error) {
+    console.log(error);
+    response.end();
+  });
+
+  request.on('data', function(chunk) {
+    voiceRequest.write(chunk);
+  });
+  request.on('end', function() {
+    voiceRequest.end();
+  });
+  console.log(request.headers);
 })
 
 server.listen(process.env.PORT || PORT);
