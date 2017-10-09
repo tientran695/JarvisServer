@@ -1,26 +1,23 @@
-/*!
- * apiai
- * Copyright(c) 2015 http://api.ai/
- * Apache 2.0 Licensed
- */
+'use strict';
 const PORT = 3484;
-var http = require('http');
+
 var express = require('express');
+const bodyParser = require('body-parser');
+
 var appServer = express();
-var server = http.Server(appServer);
-var apiai = require("apiai")
-var app = apiai("33371b1bd65149429018582c7b7f8b6b");
-var options = {
-    sessionId: '1134225d-519b-4ce2-b389-0033b129dbba'
-};
 
-appServer.get('/', function (req, res) {
-  console.log("Nhan ban tin GET");
-})
-//---------
-appServer.post('/query', function (req, res) {
-  console.log("Nhan ban tin POST");
-  console.log(req);
-})
+appServer.use(bodyParser.urlencoded({
+    extended: true
+}));
 
-server.listen(process.env.PORT || PORT);
+appServer.use(bodyParser.json());
+
+appServer.post('/echo', function(req, res) {
+    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.device ? req.body.result.parameters.device : "Seems like some problem. Speak again."
+    return res.json({
+        speech: speech,
+        displayText: speech,
+    });
+});
+
+appServer.listen(process.env.PORT || PORT);
