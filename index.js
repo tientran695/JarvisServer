@@ -18,9 +18,9 @@ appServer.get('/', function (req, res) {
   console.log("Nhan ban tin GET");
 })
 //---------
-appServer.post('/', function (req, res) {
+appServer.post('/query', function (req, res) {
   console.log("Nhan ban tin POST");
-  console.log(res);
+  console.log(req);
 })
 
 server.listen(process.env.PORT || PORT);
