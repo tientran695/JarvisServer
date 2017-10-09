@@ -1,6 +1,3 @@
-'use strict';
-const PORT = 3484;
-
 var express = require('express');
 const bodyParser = require('body-parser');
 
@@ -19,10 +16,6 @@ appServer.post('/echo', function(req, res) {
     console.log(device);
     console.log(location);
     console.log(state);
-    // return res.json({
-    //     speech: req,
-    //     displayText: req,
-    // });
 });
 
-appServer.listen(process.env.PORT || PORT);
+appServer.listen(process.env.PORT);
