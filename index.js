@@ -20,17 +20,18 @@ appServer.get('/', function (req, res) {
 //---------
 appServer.post('/', function (req, res) {
   console.log("Nhan ban tin POST");
-  var request = app.getContextsRequest(options);
+
+  var request = app.voiceRequest(options);
   request.on('response', function(response) {
     console.log(response);
-  });
+});
 
   request.on('error', function(error) {
     console.log(error);
-  });
+});
 
-  request.end();
-  })
+request.end();
+})
 
 server.listen(process.env.PORT || PORT);
 
