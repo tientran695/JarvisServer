@@ -9,33 +9,28 @@ var express = require('express');
 var appServer = express();
 var server = http.Server(appServer);
 var apiai = require("apiai")
-var appJarvis = apiai("33371b1bd65149429018582c7b7f8b6b");
+var app = apiai("33371b1bd65149429018582c7b7f8b6b");
+var options = {
+    sessionId: '1134225d-519b-4ce2-b389-0033b129dbba'
+};
 
 appServer.get('/', function (req, res) {
   console.log("Nhan ban tin GET");
 })
-
+//---------
 appServer.post('/', function (req, res) {
   console.log("Nhan ban tin POST");
-  var voiceRequest = appJarvis.voiceRequest();
-  voiceRequest.on('response', function(_response) {
-    response.end(JSON.stringify(_response));
-              // var json = JSON.stringify({'resolvedQuery': _response['result']['resolvedQuery']})
-              // response.end(json);
-            });
-  voiceRequest.on('error', function(error) {
-    console.log(error);
-    response.end();
+  var request = app.getContextsRequest(options);
+  request.on('response', function(response) {
+    console.log(response);
   });
 
-  request.on('data', function(chunk) {
-    voiceRequest.write(chunk);
+  request.on('error', function(error) {
+    console.log(error);
   });
-  request.on('end', function() {
-    voiceRequest.end();
-  });
-  console.log(request.headers);
-})
+
+  request.end();
+  })
 
 server.listen(process.env.PORT || PORT);
 
