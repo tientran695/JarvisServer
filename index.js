@@ -13,8 +13,12 @@ appServer.use(bodyParser.urlencoded({
 appServer.use(bodyParser.json());
 
 appServer.post('/echo', function(req, res) {
-    var speech = req.body.result.parameters.device;
-    console.log(speech);
+    var device = req.body.result.parameters.device;
+    var location = req.body.result.parameters.location;
+    var state = req.body.result.parameters.state;
+    console.log(device);
+    console.log(location);
+    console.log(state);
     // return res.json({
     //     speech: req,
     //     displayText: req,
