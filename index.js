@@ -13,11 +13,12 @@ appServer.use(bodyParser.urlencoded({
 appServer.use(bodyParser.json());
 
 appServer.post('/echo', function(req, res) {
-    //var speech = req.body.result.parameters.device;
-    return res.json({
-        speech: req,
-        displayText: req,
-    });
+    var speech = req.body.result.parameters.device;
+    console.log(speech);
+    // return res.json({
+    //     speech: req,
+    //     displayText: req,
+    // });
 });
 
 appServer.listen(process.env.PORT || PORT);
