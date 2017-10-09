@@ -16,7 +16,7 @@ appServer.post('/echo', function(req, res) {
     //var speech = req.body.result.parameters.device;
     return res.json({
         speech: req,
-        displayText: speech,
+        displayText: req,
     });
 });
 
