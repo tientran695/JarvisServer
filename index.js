@@ -11,8 +11,9 @@ let options = {
   user: 'tientran695',
   pass: 'familyofme36'
 };
+var mongoUri = 'mongodb://tientran695:familyofme36@ds141175.mlab.com:41175/iot';
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://tientran695:familyofme36@ds141175.mlab.com:41175/iot', options).then(
+mongoose.connect(mongoUri, options).then(
   () => {
     console.log("Connect DB successfully");
   },

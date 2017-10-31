@@ -17,21 +17,19 @@ mongoose.connect('mongodb://tientran695:familyofme36@ds141175.mlab.com:41175/iot
 )
 
 const userSchema = new mongoose.Schema({
-  name: String,
-  age: Number,
+  device: String,
+  location: String,
+  state: String,
   date: {
     type: Date,
     default: Date.now
   }
 })
 
-const user = mongoose.model('infomation', userSchema)
+const user = mongoose.model('Status', userSchema)
 
-// user.create({
-//   name: "tien",
-//   age: 23
-// })
-
-user.find().exec((err, users) => {
-  console.log(users);
+user.create({
+  device: "tien",
+  location: " ",
+  state: " ";
 })
