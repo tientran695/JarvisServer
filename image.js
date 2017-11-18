@@ -19,6 +19,7 @@ fs.readdir("image/", function(err, files){
 
 io.sockets.on('connection', function(client){
   console.log("Co nguoi ket noi!");
+
   client.on('GETIMAGE', function(data){
     fs.readFile(getRandomFileName(arrayImage), function(err, data){
       if(!err){
@@ -28,9 +29,6 @@ io.sockets.on('connection', function(client){
         console.log('That bai');
       }
     })
-  })
-  client.on('Hello', function(data){
-    console.log("hay lam");
   })
 })
 

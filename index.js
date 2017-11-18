@@ -1,6 +1,5 @@
 var express = require('express');
 const bodyParser = require('body-parser');
-
 var appServer = express();
 
 //mongodb

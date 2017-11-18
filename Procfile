@@ -1,1 +1,1 @@
-web: node image.js
+web: node index.js
