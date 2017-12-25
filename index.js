@@ -1,9 +1,10 @@
+var PORT = 3000;
 var express = require('express');
 const bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 var appServer = express();
 
-//mongodb
-var mongoose = require('mongoose');
+
 let options = {
   db: {native_parser: true},
   server: {poolSize: 5},
@@ -19,42 +20,33 @@ mongoose.connect(mongoUri, options).then(
   err => {
     console.log('Connect failed. Error: ${err}');
   }
-)
-
-const userSchema = new mongoose.Schema({
-  device: String,
-  location: String,
-  state: String,
-  date: {
-    type: Date,
-    default: Date.now
-  }
+);
+var userSchema = new mongoose.Schema({
+  username: String,
+  pass: String
+});
+var db = mongoose.model('users', userSchema);
+//db.create({username: "tientran695", pass: "123456"});
+// db.find().exec((err, users) => {
+//   console.log(users);
+// })
+var name = "tientran695";
+var pass = "123456";
+db.find({username : name, pass : pass}, function(err, user){
+  //console.log(err);
+  console.log(user);
 })
-
-const db = mongoose.model('Status', userSchema)
-//-----------------------------------------------------
-
 
 appServer.use(bodyParser.urlencoded({
     extended: true
 }));
-
 appServer.use(bodyParser.json());
-
 appServer.post('/echo', function(req, res) {
     var device = req.body.result.parameters.device;
     var location = req.body.result.parameters.location;
     var state = req.body.result.parameters.state;
     //update on mongodb
-    db.create({
-      device: device,
-      location: location,
-      state: state
-    })
-
-    console.log(device);
-    console.log(location);
-    console.log(state);
+    //.................
 });
 
-appServer.listen(process.env.PORT);
+appServer.listen(process.env.PORT || PORT);
